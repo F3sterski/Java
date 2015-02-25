@@ -25,6 +25,7 @@ public class CalculatorTest {
     public void divideByZero() {
           c.div(3,0);
     }
+    
     @Test
     public void testGreater() {	
         Assert.assertTrue(c.greater(3, 2));
