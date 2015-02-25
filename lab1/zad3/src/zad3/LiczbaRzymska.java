@@ -5,8 +5,8 @@ import java.util.Map;
 public class LiczbaRzymska {
 
 	private int number;
-	
-	public void LizbaRzymska(int a){
+
+	public LiczbaRzymska(int a){
 		this.setNumber(a);
 	}
 
