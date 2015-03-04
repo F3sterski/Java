@@ -1,25 +1,18 @@
 package zad3;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
 
 public class LiczbaRzymska {
 
-	private int number;
-
-	public LiczbaRzymska(int a){
-		this.setNumber(a);
-	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
+	public LiczbaRzymska(){
 	}
 	
-	public String toString(){
-		int Int = this.getNumber();
+	public String toString(int Int){
+		if(Int>3999 || Int<1) throw new IllegalArgumentException("Bad integer"); 
 		LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();
 	    roman_numerals.put("M", 1000);
 	    roman_numerals.put("CM", 900);
@@ -52,4 +45,35 @@ public class LiczbaRzymska {
 	    }
 	    return sb.toString();
 	}
+	  private static final int[] VALUES = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+	  private static final String[] DIGRAMS = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};    
+
+	  public int toInteger(String s) {
+	      if (s.isEmpty())
+	          throw new IllegalArgumentException("empty string");
+	      if (!s.matches("^(C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$"))
+	          throw new IllegalArgumentException("unexpected roman numerals");
+
+	      //creates a regex with each roman numeral pattern -> M|CM|D|......
+	      //You'll need it to check if you have several occurrences of a pattern
+	      //-> CC or III...
+	      StringBuilder builder = new StringBuilder();
+	      for (int i = 0; i < DIGRAMS.length; i++) {
+	          builder.append(DIGRAMS[i]);
+
+	          if (i < DIGRAMS.length - 1)
+	              builder.append("|");
+	      }     
+
+	      Matcher matcher = Pattern.compile(builder.toString()).matcher(s);    
+	      int result = 0;
+
+	      while (matcher.find()) {
+	          for (int j = 0; j < DIGRAMS.length; j++) {
+	              if (DIGRAMS[j].equals(matcher.group()))
+	                  result += VALUES[j];
+	          }
+	      }
+	      return result;
+	  }	  
 }
