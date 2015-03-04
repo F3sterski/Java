@@ -37,39 +37,38 @@ public class zabawa implements psikus {
 		Random generator = new Random();
 		String s = liczba.toString();
 		StringBuilder sb = new StringBuilder(s);
-		boolean hoho = true;
-		int trzy=0;
-		int siedem=0;
-		int dziewiec=0;
-		
-		for(int i =0;i<sb.length();i++){
-			switch(sb.charAt(i)){
+		List<Integer> listInt = new ArrayList<Integer>();
+		for(int i=0;i<sb.length();i++){
+			switch (sb.charAt(i)){
 			case '3':
-				trzy++;
+				listInt.add(i);
 				break;
 			case '7':
-				siedem++;
+				listInt.add(i);
+				break;			
+			case '6':
+				listInt.add(i);
 				break;
-			case '9':
-				dziewiec++;
-				break;
-			}			
-		}
-		for(int i =0 ; i<sb.length();i++){
-			if(generator.nextBoolean() && hoho){
-				hoho = false;
-				switch(sb.charAt(i)){
-				case '3':
-					sb.setCharAt(sb.charAt(i), '8');
-					break;
-				case '7':
-					sb.setCharAt(sb.charAt(i), '1');
-					break;
-				case '9':
-					sb.setCharAt(sb.charAt(i), '9');
-					break;
-				}
 			}
+		}
+		if(listInt.isEmpty()){
+			return liczba;
+		}
+		else{
+			Integer PozycjaLiczby = generator.nextInt(listInt.size());
+			Integer Liczba = listInt.get(PozycjaLiczby);
+			switch (Liczba){
+			case 3:
+				Liczba=8;
+				break;
+			case 7:
+				Liczba=1;
+				break;			
+			case 9:
+				Liczba=9;
+				break;
+			}
+			sb.setCharAt(PozycjaLiczby, Liczba.toString().charAt(0));
 		}
 		return Integer.parseInt(sb.toString());		
 	}
