@@ -6,9 +6,7 @@ import java.util.*;
 
 
 public class LiczbaRzymskaTest {
-	
-	LiczbaRzymska roman = new LiczbaRzymska();
-	
+		
 	@Test
     public void testKnownValues() {	
 		Hashtable<Integer,String> numbers
@@ -76,47 +74,26 @@ public class LiczbaRzymskaTest {
 		while(enumKey.hasMoreElements()){
 			Integer key = enumKey.nextElement();
 		    String val = numbers.get(key);
-		    Assert.assertEquals(val,roman.toString(key));
-		}
-		//From roman to num
-		while(enumKey.hasMoreElements()){
-			Integer key = enumKey.nextElement();
-		    String val = numbers.get(key);
-		    Assert.assertEquals(val,roman.toInteger(val));
+		    LiczbaRzymska roman = new LiczbaRzymska(key);
+		    Assert.assertEquals(val,roman.toString());
 		}
 	}
 		
 	@Test(expected=IllegalArgumentException.class)
 	public void ToRomanBadInputMinus(){
-		roman.toString(-2);
+		LiczbaRzymska roman = new LiczbaRzymska(-2);
+		roman.toString();
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void ToRomanBadInputPlus(){
-		roman.toString(5000);
+		LiczbaRzymska roman = new LiczbaRzymska(5000);
+		roman.toString();
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void ToRomanBadInputZero(){
-		roman.toString(0);
-	}
-    
-	@Test(expected=IllegalArgumentException.class)
-	public void ToIntegerBadFormat(){
-		roman.toInteger("CMCM");
-	}	
-	
-	@Test
-	public void AllToRoman(){
-		for(int i=1;i<4000;i++){
-			String k = roman.toString(i);
-			Assert.assertEquals(k,roman.toString(i));
-		}
-	}
-	public void AllToDecimal(){
-		for(int i=1;i<4000;i++){
-			String k = roman.toString(i);
-			Assert.assertEquals(k,roman.toInteger(k));
-		}
+		LiczbaRzymska roman = new LiczbaRzymska(0);
+		roman.toString();
 	}
 }
