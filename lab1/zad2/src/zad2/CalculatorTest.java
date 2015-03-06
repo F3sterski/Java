@@ -23,10 +23,10 @@ public class CalculatorTest {
         Assert.assertEquals(2, c.div(4, 2),0.01);
     }
     
-    //@Test(expected=ArithmeticException.class)
-    //public void divideByZero() {
-    //      c.div(3,0);
-    //}
+	@Test(expected=AssertionError.class)
+    public void divideByZero() {
+    	Assert.assertEquals(0,c.div(3.0,0.0),0.1);
+    }
     
     @Test
     public void testGreater() {	
