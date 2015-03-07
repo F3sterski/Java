@@ -55,20 +55,26 @@ public class zabawa implements psikus {
 			return liczba;
 		}
 		else{
-			Integer PozycjaLiczby = generator.nextInt(listInt.size());
-			Integer Liczba = listInt.get(PozycjaLiczby);
+			System.out.println(listInt);
+			Integer PozycjaLiczbyWLiscie = generator.nextInt(listInt.size());
+			System.out.println(PozycjaLiczbyWLiscie);
+			Integer LiczbaZListy = listInt.get(PozycjaLiczbyWLiscie);
+			System.out.println(LiczbaZListy);			
+			char Liczba = sb.charAt(listInt.get(PozycjaLiczbyWLiscie));
+			System.out.println(Liczba);
+			
 			switch (Liczba){
-			case 3:
-				Liczba=8;
+			case '3':
+				Liczba='8';
 				break;
-			case 7:
-				Liczba=1;
+			case '7':
+				Liczba='1';
 				break;			
-			case 9:
-				Liczba=9;
+			case '6':
+				Liczba='9';
 				break;
 			}
-			sb.setCharAt(PozycjaLiczby, Liczba.toString().charAt(0));
+			sb.setCharAt(listInt.get(PozycjaLiczbyWLiscie), Liczba);
 		}
 		return Integer.parseInt(sb.toString());		
 	}
