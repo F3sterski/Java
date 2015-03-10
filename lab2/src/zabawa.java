@@ -55,13 +55,8 @@ public class zabawa implements psikus {
 			return liczba;
 		}
 		else{
-			System.out.println(listInt);
-			Integer PozycjaLiczbyWLiscie = generator.nextInt(listInt.size());
-			System.out.println(PozycjaLiczbyWLiscie);
-			Integer LiczbaZListy = listInt.get(PozycjaLiczbyWLiscie);
-			System.out.println(LiczbaZListy);			
+			Integer PozycjaLiczbyWLiscie = generator.nextInt(listInt.size());			
 			char Liczba = sb.charAt(listInt.get(PozycjaLiczbyWLiscie));
-			System.out.println(Liczba);
 			
 			switch (Liczba){
 			case '3':
