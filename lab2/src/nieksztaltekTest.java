@@ -25,7 +25,9 @@ public class nieksztaltekTest {
 	
 	@Test
 	public void NieksztaltekOneFromOthers() {
-		Assert.assertThat(z.nieksztaltek(1136), either(is(1186)).or(is(1139)));
-		Assert.assertThat(z.nieksztaltek(7226), either(is(1226)).or(is(7229)));
+		for(int i=0;i<100;i++){
+			Assert.assertThat(z.nieksztaltek(1136), either(is(1186)).or(is(1139)));
+			Assert.assertThat(z.nieksztaltek(7226), either(is(1226)).or(is(7229)));
+		}
 	}
 }

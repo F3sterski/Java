@@ -23,8 +23,10 @@ public class hultajchochlaTest {
     
 	@Test
 	public void HultajchochlaReturnCorrectNumber() throws NieudanyPsikusException {
-		Assert.assertThat(z.hultajchochla(123), either(is(132)).or(is(321)).or(is(213)));
-		Assert.assertThat(z.hultajchochla(4567),either(is(5467)).or(is(4576)).or(is(4657)).or(is(6547)).or(is(7564)).or(is(4765)));
+		for(int i=0;i<100;i++){
+			Assert.assertThat(z.hultajchochla(123), either(is(132)).or(is(321)).or(is(213)));
+			Assert.assertThat(z.hultajchochla(4567),either(is(5467)).or(is(4576)).or(is(4657)).or(is(6547)).or(is(7564)).or(is(4765)));
+		}
 	}    
     
 }
