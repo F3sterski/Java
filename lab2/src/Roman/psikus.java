@@ -1,3 +1,4 @@
+package Roman;
 
 public interface psikus {
    Integer cyfrokrad(Integer liczba);
