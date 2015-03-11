@@ -1,4 +1,5 @@
-package Roman;
+package zabawa;
+
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

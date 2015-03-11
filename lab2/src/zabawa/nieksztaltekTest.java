@@ -1,4 +1,4 @@
-package Roman;
+package zabawa;
 import static org.hamcrest.CoreMatchers.either;
 import static org.hamcrest.CoreMatchers.is;
 

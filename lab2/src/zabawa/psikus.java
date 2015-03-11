@@ -1,4 +1,4 @@
-package Roman;
+package zabawa;
 
 public interface psikus {
    Integer cyfrokrad(Integer liczba);
