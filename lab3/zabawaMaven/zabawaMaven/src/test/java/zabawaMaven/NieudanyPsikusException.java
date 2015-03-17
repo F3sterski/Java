@@ -1,4 +1,3 @@
-package zabawa;
-
+package zabawaMaven;
 
 public class NieudanyPsikusException extends Exception {};

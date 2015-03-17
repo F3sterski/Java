@@ -1,5 +1,4 @@
-package zabawa;
-
+package zabawaMaven;
 
 public interface psikus {
    Integer cyfrokrad(Integer liczba);

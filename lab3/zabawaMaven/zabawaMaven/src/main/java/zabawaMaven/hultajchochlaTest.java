@@ -1,14 +1,10 @@
-package zabawa;
-
+package zabawaMaven;
 import static org.hamcrest.CoreMatchers.either;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import zabawa.NieudanyPsikusException;
-import zabawa.zabawa;
 
 
 public class hultajchochlaTest {
