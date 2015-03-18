@@ -14,6 +14,9 @@ public class MessageServiceSimpleImpl implements MessageService {
 		// ...
 		return ConnectionStatus.SUCCESS;
 	}
+	public boolean getRandom(){
+		return random.nextBoolean();
+	}
 
 	public SendingStatus send(String server, String message)
 			throws MalformedRecipientException {
@@ -29,7 +32,7 @@ public class MessageServiceSimpleImpl implements MessageService {
 		}
 
 		// sending logic here ...
-		if (random.nextBoolean()) {
+		if (getRandom()) {
 			return SendingStatus.SENT;
 		}
 		return SendingStatus.SENDING_ERROR;
