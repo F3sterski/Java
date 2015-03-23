@@ -22,7 +22,7 @@ public class Messenger {
 		return 1;
 	}
 
-	public int sendMessage(String server, String message) {
+	public int sendMessage(String server, String message) throws MalformedRecipientException {
 
 		int result = -1;
 
@@ -41,6 +41,7 @@ public class Messenger {
 
 		} catch (MalformedRecipientException e) {
 			result = 2;
+			throw new MalformedRecipientException();	
 		}
 		return result;
 	}
