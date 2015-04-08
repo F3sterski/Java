@@ -54,12 +54,6 @@ public class MessangerSteps {
 			when(mockMS.checkConnection(server)).thenReturn(ConnectionStatus.FAILURE);			
 		}		
 		try{
-		if (message == null || message.length() < 3){
-			when(mockMS.send(server, message)).thenThrow(new MalformedRecipientException());		
-		}
-		if (server == null || server.length() < 4){
-			when(mockMS.send(server, message)).thenThrow(new MalformedRecipientException());			
-		}
 		if (mockMS.checkConnection(server) == ConnectionStatus.FAILURE) {
 			when(mockMS.send(server,message)).thenReturn(SendingStatus.SENDING_ERROR);
 		}else{
@@ -80,9 +74,5 @@ public class MessangerSteps {
 	public void shouldSend(int result) throws MalformedRecipientException{
     		assertEquals(result, MS.sendMessage(server,message));
 	}  
-	
-    @Then("send should return exception $result")
-	public void shouldExceptionSend(int result) throws MalformedRecipientException{
-    		assertEquals(result, MS.sendMessage(server,message));
-	}  
+	  
 }

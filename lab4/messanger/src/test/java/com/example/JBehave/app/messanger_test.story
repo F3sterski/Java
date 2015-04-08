@@ -10,6 +10,3 @@ Then send should return 0
 
 When set parameters server and message to wp.com message
 Then send should return 1
-
-When set parameters server and message to w message
-Then send should return exception 2
