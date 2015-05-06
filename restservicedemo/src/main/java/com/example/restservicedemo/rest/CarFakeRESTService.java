@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.example.restservicedemo.domain.Car;
+import com.example.restservicedemo.domain.Person;
 
 @Path("cars")
 public class CarFakeRESTService {	
@@ -18,7 +19,8 @@ public class CarFakeRESTService {
 	@Path("/{carId}")
 	@Produces("application/json")
 	public Car getCar(@PathParam("carId") Long id){
-		return new Car(1L, "Opel", "Corsa", 2005);
+		Person p = cm.getCars(id);
+		return p;
 	}
 	
 	@POST

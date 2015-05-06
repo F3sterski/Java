@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.example.restservicedemo.domain.Car;
 import com.example.restservicedemo.domain.Person;
+import com.example.restservicedemo.service.CarManager;
 import com.example.restservicedemo.service.PersonManager;
 import com.jayway.restassured.RestAssured;
 
@@ -56,6 +57,14 @@ public class CarServiceTest {
 		    then().assertThat().
 		    body("firstName", equalTo(list.get(i).getFirstName()));
 		}
+	}
+	
+	@Test
+	public void PersonWithCar(){
+		CarManager cm = new CarManager();
+		Person fake = new Person("Adam",1990);
+		Car fooCar = new Car(2L,"Ford","Fiesta",1990,fake);
+		cm.addCar(fooCar);
 	}
 	
 
