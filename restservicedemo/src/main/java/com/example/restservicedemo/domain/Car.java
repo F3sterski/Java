@@ -9,16 +9,7 @@ public class Car {
 	private String make;
 	private String model;	
 	private int yop;
-	private Person owner;
 	
-	public Car(long id, String make, String model, int yop, Person owner) {
-		super();
-		this.id = id;
-		this.make = make;
-		this.model = model;
-		this.yop = yop;
-		this.owner = owner;
-	}
 	public Car(long id, String make, String model, int yop) {
 		super();
 		this.id = id;
@@ -53,12 +44,6 @@ public class Car {
 	}
 	public void setYop(int yop) {
 		this.yop = yop;
-	}
-	public Person getPerson() {
-		return owner;
-	}
-	public void setPersonId(Person person) {
-		owner = person;
 	}
 	
 }
