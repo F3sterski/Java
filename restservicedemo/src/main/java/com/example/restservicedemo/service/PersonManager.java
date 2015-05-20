@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.example.restservicedemo.domain.Car;
+import com.example.restservicedemo.domain.CarhasPerson;
 import com.example.restservicedemo.domain.Person;
 
 public class PersonManager {
@@ -44,7 +47,7 @@ public class PersonManager {
 				statement.executeUpdate(CREATE_TABLE_PERSON);
 
 			addPersonStmt = connection
-					.prepareStatement("INSERT INTO Person (name, yob) VALUES (?, ?)");
+					.prepareStatement("INSERT INTO Person (id, name, yob) VALUES (?, ?, ?)");
 			deleteAllPersonsStmt = connection
 					.prepareStatement("DELETE FROM Person");
 			getAllPersonsStmt = connection
@@ -72,9 +75,10 @@ public class PersonManager {
 	public int addPerson(Person person) {
 		int count = 0;
 		try {
+			addPersonStmt.setLong(1, person.getId());
 			addPersonStmt.setString(1, person.getFirstName());
 			addPersonStmt.setInt(2, person.getYob());
-
+			
 			count = addPersonStmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -122,5 +126,26 @@ public class PersonManager {
 
 		return p;
 	}
+	
+	public Person getPersonWithCars(Long id) {
+		Person p = new Person();
+		try {
+			getPersonByIdStmt.setLong(1, id);
+			ResultSet rs = getPersonByIdStmt.executeQuery();
+			CarToPersonManager ctpm = new CarToPersonManager();
+			List<Car> cars = ctpm.getAllPersonCars(id);
+			while (rs.next()) {
+				p.setId(rs.getInt("id"));
+				p.setFirstName(rs.getString("name"));
+				p.setYob(rs.getInt("yob"));
+				p.setCars(cars);
+				break;
+			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return p;
+	}
 }

@@ -11,9 +11,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.example.restservicedemo.domain.Car;
+import com.example.restservicedemo.domain.Person;
+import com.example.restservicedemo.service.CarManager;
+import com.example.restservicedemo.service.CarToPersonManager;
+import com.example.restservicedemo.service.PersonManager;
 import com.jayway.restassured.RestAssured;
 
 public class CarServiceTest {
+	
+	CarManager cm = new CarManager();
+	PersonManager pm = new PersonManager();
+	CarToPersonManager ctpm = new CarToPersonManager();
 	
 	@BeforeClass
 	public static void setUp(){
@@ -22,14 +30,40 @@ public class CarServiceTest {
 		RestAssured.basePath = "/restservicedemo";
 	}
 	
-	@Test
+	//@Test
 	public void getCar(){
+		
+		cm.addCar(new Car(1,"Opel","Corsa",1990));
+		
 		get("/cars/0").then().assertThat().body("model", equalTo("Corsa"));
 		
 		
 		Car aCar = get("/cars/0").as(Car.class);
 		
 		assertThat(aCar.getMake(), equalToIgnoringCase("Opel"));
+		
+		cm.clearCars();
+	}
+	
+	//@Test
+	public void getPersonCars(){
+		Car car1 = new Car(1,"Opel","Corsa",1990);
+		Car car2 = new Car(2,"Opel","Astra",1991);
+		Person Antos = new Person(5,"Antos",1989);
+		pm.addPerson(Antos);
+		cm.addCar(car1);
+		cm.addCar(car2);
+		ctpm.addCarToPerson(car1,Antos);
+		ctpm.addCarToPerson(car2,Antos);
+		
+		get("/cars/0").then().assertThat().body("model", equalTo("Corsa"));
+		
+		
+		Car aCar = get("/cars/0").as(Car.class);
+		
+		assertThat(aCar.getMake(), equalToIgnoringCase("Opel"));
+		
+		cm.clearCars();
 	}
 	
 	@Test

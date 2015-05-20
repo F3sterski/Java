@@ -20,6 +20,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.example.restservicedemo.domain.Car;
 import com.example.restservicedemo.domain.Person;
 import com.jayway.restassured.RestAssured;
 

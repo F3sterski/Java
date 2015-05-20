@@ -2,5 +2,6 @@
 <dataset>
   <PERSON ID="0" NAME="Bolek" YOB="1972"/>
   <PERSON ID="1" NAME="Lolek" YOB="1972"/>
-  <PERSON ID="2" NAME="Tola" YOB="1975"/>
-</dataset>
+  <PERSON ID="2" NAME="Tola" YOB="1975"></PERSON>
+  <CAR ID="0" MAKE="Audi" MODEL="A6" YOP="1998"></CAR>
+  <CARHASPERSON IDCAR="0" IDPERSON="1"></CARHASPERSON></dataset>
