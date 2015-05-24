@@ -76,8 +76,8 @@ public class PersonManager {
 		int count = 0;
 		try {
 			addPersonStmt.setLong(1, person.getId());
-			addPersonStmt.setString(1, person.getFirstName());
-			addPersonStmt.setInt(2, person.getYob());
+			addPersonStmt.setString(2, person.getFirstName());
+			addPersonStmt.setInt(3, person.getYob());
 			
 			count = addPersonStmt.executeUpdate();
 
@@ -109,14 +109,16 @@ public class PersonManager {
 
 	public Person getPerson(Long id) {
 		Person p = new Person();
+		CarToPersonManager cpm = new CarToPersonManager();
 		try {
 			getPersonByIdStmt.setLong(1, id);
 			ResultSet rs = getPersonByIdStmt.executeQuery();
 
 			while (rs.next()) {
-				p.setId(rs.getInt("id"));
+				p.setId(rs.getLong("id"));
 				p.setFirstName(rs.getString("name"));
 				p.setYob(rs.getInt("yob"));
+				p.setCars(cpm.getAllPersonCars(rs.getLong("id")));
 				break;
 			}
 

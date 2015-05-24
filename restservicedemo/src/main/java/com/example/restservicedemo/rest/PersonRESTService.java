@@ -9,7 +9,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.example.restservicedemo.domain.Car;
 import com.example.restservicedemo.domain.Person;
+import com.example.restservicedemo.service.CarManager;
+import com.example.restservicedemo.service.CarToPersonManager;
 import com.example.restservicedemo.service.PersonManager;
 
 @Path("persons")

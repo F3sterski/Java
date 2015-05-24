@@ -59,8 +59,6 @@ public class CarToPersonManager {
 					.prepareStatement("SELECT idcar, idperson FROM CarHasPerson where idcar = ?");
 			getPersonCarsByIdStmt = connection
 					.prepareStatement("SELECT idcar, idperson FROM CarHasPerson where idperson = ?");
-			getCarByIdStmt = connection
-					.prepareStatement("SELECT id, make, model, yop FROM Car where id = ?");
 			getPersonByIdStmt = connection
 					.prepareStatement("SELECT id, name, yob FROM Person where id = ?");
 
@@ -116,21 +114,12 @@ public class CarToPersonManager {
 
 	public List<Car> getAllPersonCars(Long id) {
 		List<Car> Stmt = new ArrayList<Car>();
+		CarManager cm = new CarManager();
 		try {
 			getPersonCarsByIdStmt.setLong(1, id);
 			ResultSet rs = getPersonCarsByIdStmt.executeQuery();
-
 			while (rs.next()) {
-				getCarByIdStmt.setLong(1, rs.getInt("idcar"));
-				ResultSet rsc = getCarByIdStmt.executeQuery();
-				while (rsc.next()) {
-					Car c = new Car();
-					c.setId(rs.getLong("id"));
-					c.setMake(rs.getString("make"));
-					c.setModel(rs.getString("model"));
-					c.setYop(rs.getInt("yop"));
-					Stmt.add(c);
-				}
+				Stmt.add(cm.getCar(rs.getLong("idcar")));
 			}
 
 		} catch (SQLException e) {
@@ -151,9 +140,9 @@ public class CarToPersonManager {
 				ResultSet rsc = getCarByIdStmt.executeQuery();
 				while (rsc.next()) {
 					Person p = new Person();
-					p.setId(rs.getLong("id"));
-					p.setFirstName(rs.getString("name"));
-					p.setYob(rs.getInt("yob"));
+					p.setId(rsc.getLong("id"));
+					p.setFirstName(rsc.getString("name"));
+					p.setYob(rsc.getInt("yob"));
 					Stmt.add(p);
 				}
 			}

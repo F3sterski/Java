@@ -4,7 +4,7 @@ import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 import org.junit.BeforeClass;
@@ -30,7 +30,7 @@ public class CarServiceTest {
 		RestAssured.basePath = "/restservicedemo";
 	}
 	
-	//@Test
+	@Test
 	public void getCar(){
 		
 		cm.addCar(new Car(1,"Opel","Corsa",1990));
@@ -42,10 +42,9 @@ public class CarServiceTest {
 		
 		assertThat(aCar.getMake(), equalToIgnoringCase("Opel"));
 		
-		cm.clearCars();
 	}
 	
-	//@Test
+	@Test
 	public void getPersonCars(){
 		Car car1 = new Car(1,"Opel","Corsa",1990);
 		Car car2 = new Car(2,"Opel","Astra",1991);
@@ -55,15 +54,15 @@ public class CarServiceTest {
 		cm.addCar(car2);
 		ctpm.addCarToPerson(car1,Antos);
 		ctpm.addCarToPerson(car2,Antos);
+		Antos.setCars(ctpm.getAllPersonCars(Antos.getId()));
 		
-		get("/cars/0").then().assertThat().body("model", equalTo("Corsa"));
+		assertThat(get("/persons/"+Antos.getId()).getBody().path("cars[0]"), 
+				equalTo(get("/cars/1").getBody().path(".")));
+		assertThat(get("/persons/"+Antos.getId()).getBody().path("cars[1]"), 
+				equalTo(get("/cars/2").getBody().path(".")));
+		//Car aCar = get("/cars/0").as(Car.class);
+		//assertThat(aCar.getMake(), equalToIgnoringCase("Opel"));
 		
-		
-		Car aCar = get("/cars/0").as(Car.class);
-		
-		assertThat(aCar.getMake(), equalToIgnoringCase("Opel"));
-		
-		cm.clearCars();
 	}
 	
 	@Test

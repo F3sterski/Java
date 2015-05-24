@@ -44,7 +44,7 @@ public class CarManager {
 				statement.executeUpdate(CREATE_TABLE_CAR);
 
 			addCarStmt = connection
-					.prepareStatement("INSERT INTO Car (make, model, yop) VALUES (?, ?, ?)");
+					.prepareStatement("INSERT INTO Car (id, make, model, yop) VALUES (?, ?, ?, ?)");
 			deleteAllCarsStmt = connection
 					.prepareStatement("DELETE FROM Car");
 			getAllCarsStmt = connection
@@ -72,9 +72,10 @@ public class CarManager {
 	public int addCar(Car Car) {
 		int count = 0;
 		try {
-			addCarStmt.setString(1, Car.getMake());
-			addCarStmt.setString(2, Car.getModel());
-			addCarStmt.setInt(3, Car.getYop());
+			addCarStmt.setLong(1, Car.getId());
+			addCarStmt.setString(2, Car.getMake());
+			addCarStmt.setString(3, Car.getModel());
+			addCarStmt.setInt(4, Car.getYop());
 			
 			count = addCarStmt.executeUpdate();
 

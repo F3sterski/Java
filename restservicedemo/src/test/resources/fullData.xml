@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <PERSON ID="0" NAME="Bolek" YOB="1972"/>
-  <PERSON ID="1" NAME="Lolek" YOB="1972"/>
-  <PERSON ID="2" NAME="Tola" YOB="1975"></PERSON>
-  <CAR ID="0" MAKE="Audi" MODEL="A6" YOP="1998"></CAR>
+  <PERSON NAME="Bolek" YOB="1972"/>
+  <PERSON NAME="Lolek" YOB="1972"/>
+  <PERSON NAME="Tola" YOB="1975"></PERSON>
+  <CAR ID="0" MAKE="Opel" MODEL="Corsa" YOP="1998"></CAR>
   <CARHASPERSON IDCAR="0" IDPERSON="1"></CARHASPERSON></dataset>
