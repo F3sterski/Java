@@ -13,6 +13,12 @@ public class Car {
 	private int yop;
 	private List<Person> persons;
 	
+	public Car(String make, String model, int yop) {
+		this.make = make;
+		this.model = model;
+		this.yop = yop;
+	}
+	
 	public Car(long id, String make, String model, int yop) {
 		super();
 		this.id = id;

@@ -71,7 +71,7 @@ public class CarToPersonManager {
 		return connection;
 	}
 
-	void clearCars() {
+	public void clearCarstoPersons() {
 		try {
 			deleteAllStmt.executeUpdate();
 		} catch (SQLException e) {

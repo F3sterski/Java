@@ -22,12 +22,15 @@ import org.junit.Test;
 
 import com.example.restservicedemo.domain.Car;
 import com.example.restservicedemo.domain.Person;
+import com.example.restservicedemo.service.CarToPersonManager;
+import com.example.restservicedemo.service.PersonManager;
 import com.jayway.restassured.RestAssured;
 
 public class PersonServiceRESTDBTest {
 	
 	private static IDatabaseConnection connection ;
 	private static IDatabaseTester databaseTester;
+	private static Person aPerson = new Person("Ziutek", 2010);
 	
 
 	@BeforeClass
@@ -52,7 +55,6 @@ public class PersonServiceRESTDBTest {
 	@Test
 	public void addPeson() throws Exception{
 
-		Person aPerson = new Person("Ziutek", 2010);
 		given().contentType("application/json; charset=UTF-16").body(aPerson)
 				.when().post("/persons/").then().assertThat().statusCode(201);
 		
@@ -64,6 +66,34 @@ public class PersonServiceRESTDBTest {
 		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(
 				new File("src/test/resources/personData.xml"));
 		ITable expectedTable = expectedDataSet.getTable("PERSON");
+		
+		Assertion.assertEquals(expectedTable, filteredTable);
+	}
+	
+	@Test
+	public void SellCar() throws Exception{
+
+		Car aCar = new Car("Fiat","Punto",2004);
+		given().contentType("application/json; charset=UTF-16").body(aCar)
+		.when().post("/cars/").then().assertThat().statusCode(201);
+		
+		CarToPersonManager ctpm = new CarToPersonManager();
+		PersonManager pm = new PersonManager();
+		
+		ctpm.addCarToPerson(aCar, pm.getPerson(aPerson.getId()));
+		
+		IDataSet dbDataSet = connection.createDataSet();
+		ITable actualTable = dbDataSet.getTable("CarHasPerson");
+		ITable filteredTable = DefaultColumnFilter.excludedColumnsTable
+				(actualTable, new String[]{"IDCAR"});
+		
+		System.out.println(actualTable);
+		System.out.println(filteredTable);
+		
+		
+		IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(
+				new File("src/test/resources/SoldCars.xml"));
+		ITable expectedTable = expectedDataSet.getTable("CarHasPerson");
 		
 		Assertion.assertEquals(expectedTable, filteredTable);
 	}

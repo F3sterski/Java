@@ -3,10 +3,9 @@ package com.example.restservicedemo;
 import static com.jayway.restassured.RestAssured.get;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -57,26 +56,19 @@ public class CarServiceTest {
 		Antos.setCars(ctpm.getAllPersonCars(Antos.getId()));
 		
 		assertThat(get("/persons/"+Antos.getId()).getBody().path("cars[0]"), 
-				equalTo(get("/cars/1").getBody().path(".")));
+				equalTo(get("/cars/"+car1.getId()).getBody().path(".")));
 		assertThat(get("/persons/"+Antos.getId()).getBody().path("cars[1]"), 
-				equalTo(get("/cars/2").getBody().path(".")));
+				equalTo(get("/cars/"+car2.getId()).getBody().path(".")));
 		//Car aCar = get("/cars/0").as(Car.class);
 		//assertThat(aCar.getMake(), equalToIgnoringCase("Opel"));
 		
-	}
-	
-	@Test
-	public void addCar(){
-		
-		Car aCar = new Car(2, "Ford", "Fiesta", 2011);
-		given().
-		       contentType("application/json; charset=UTF-16").
-		       body(aCar).
-		when().	     
-		post("/cars/").then().assertThat().
-		statusCode(201).
-		body(containsString("Car saved:"));
-	}
-	
+	}	
+	@AfterClass
+	public static void clearUp(){
+		CarManager cm = new CarManager();
+		CarToPersonManager ctpm = new CarToPersonManager();
+		cm.clearCars();
+		ctpm.clearCarstoPersons();
+	}	
 
 }
